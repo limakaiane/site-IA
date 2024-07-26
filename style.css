@@ -1,5 +1,5 @@
 
-}:root{
+:root{
     --cor-fundo: #01080E ;
     --cor-principal: #0B0D20 ;
     --cor-secundaria: #212333; 
@@ -41,3 +41,4 @@ button {
 button:hover{
     background-color: var(--cor-destaque);
     color: var(--cor-principal);
+    } 
