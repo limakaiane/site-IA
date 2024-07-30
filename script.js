@@ -6,66 +6,106 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "A vida é bela?",
+        enunciado: "Qual a sua fruta favorita?",
         alternativas: [
             {
-                texto: "Não, ela é cruel!",
+                texto: "Maçã",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Sim, ela é única!",
+                texto: "Banana",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Laranja",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Manga",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Com a descoberta desta tecnologia, chamada Inteligência Artificial, uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre esta tecnologia. No fim de uma aula ela pede que você escreva um trabalho sobre o uso de IA em sala de aula. Qual atitude você toma?",
+        enunciado: "Qual é o seu passatempo preferido?",
         alternativas: [
             {
-                texto: "Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
+                texto: "Ler livros",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Escreve o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema.",
+                texto: "Assistir a filmes",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Praticar esportes",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Jogar videogames",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Após a elaboração do trabalho escrito, a professora realizou um debate entre a turma para entender como foi realizada a pesquisa e escrita. Nessa conversa também foi levantado um ponto muito importante: como a IA impacta o trabalho do futuro. Nesse debate, como você se posiciona?",
+        enunciado: "Se você pudesse viajar para qualquer lugar do mundo, para onde iria?",
         alternativas: [
             {
-                texto: "Defende a ideia de que a IA pode criar novas oportunidades de emprego e melhorar habilidades humanas.",
+                texto: "Paris",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Me preocupo com as pessoas que perderão seus empregos para máquinas e defendem a importância de proteger os trabalhadores.",
+                texto: "Tóquio",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Nova York",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Sydney",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Ao final da discussão, você precisou criar uma imagem no computador que representasse o que pensa sobre IA. E agora?",
+        enunciado: "Qual tipo de comida você mais gosta?",
         alternativas: [
             {
-                texto: "Criar uma imagem utilizando uma plataforma de design como o Paint.",
+                texto: "Italiana",
                 afirmacao: "afirmação"
             },
             {
-                texto: "Criar uma imagem utilizando um gerador de imagem de IA.",
+                texto: "Japonesa",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Mexicana",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Brasileira",
                 afirmacao: "afirmação"
             }
         ]
     },
     {
-        enunciado: "Você tem um trabalho em grupo de biologia para entregar na semana seguinte, o andamento do trabalho está um pouco atrasado e uma pessoa do seu grupo decidiu fazer com ajuda da IA. O problema é que o trabalho está totalmente igual ao do chat. O que você faz? ",
+        enunciado: "Qual é o seu animal de estimação ideal?",
         alternativas: [
             {
-                texto: "Escrever comandos para o chat é uma forma de contribuir com o trabalho, por isso não é um problema utilizar o texto inteiro.",
+                texto: "Cachorro",
                 afirmacao: "afirmação"
             },
             {
-                texto: "O chat pode ser uma tecnologia muito avançada, mas é preciso manter a atenção pois toda máquina erra, por isso revisar o trabalho e contribuir com as perspectivas pessoais é essencial.",
+                texto: "Gato",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Peixe",
+                afirmacao: "afirmação"
+            },
+            {
+                texto: "Pássaro",
                 afirmacao: "afirmação"
             }
         ]
@@ -76,6 +116,16 @@ let atual = 0;
 let perguntaAtual;
 
 function mostraPergunta() {
+    // Limpa as alternativas antigas
+    caixaAlternativas.innerHTML = '';
+
+    // Verifica se todas as perguntas foram respondidas
+    if (atual >= perguntas.length) {
+        caixaPerguntas.textContent = "Obrigado por participar do quiz!";
+        caixaAlternativas.innerHTML = ''; // Limpa as alternativas finais
+        return;
+    }
+
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
     mostraAlternativas();
@@ -86,10 +136,17 @@ function mostraAlternativas() {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", function () {
-            atual++;
-            mostraPergunta();
-        })
+            // Adiciona uma classe para feedback visual (opcional)
+            botaoAlternativas.classList.add("selecionado");
+
+            // Avança para a próxima pergunta após um pequeno atraso
+            setTimeout(function () {
+                atual++;
+                mostraPergunta();
+            }, 500); // Ajuste o atraso conforme necessário
+        });
         caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
+
 mostraPergunta();
